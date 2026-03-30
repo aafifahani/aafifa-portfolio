@@ -111,15 +111,15 @@ nav ul li a:hover {
 
 /* Hero Section */
 .hero {
-    padding: 120px 0;
+    padding: 60px 0;
     background: linear-gradient(135deg, var(--navy-deep) 0%, var(--navy-light) 100%);
     color: var(--white);
     text-align: center;
 }
 
 .hero-content h2 {
-    font-size: 3.5rem;
-    margin-bottom: 20px;
+    font-size: 2.5rem;
+    margin-bottom: 15px;
     font-weight: 700;
 }
 
@@ -128,7 +128,7 @@ nav ul li a:hover {
 }
 
 .hero-content p {
-    font-size: 1.2rem;
+    font-size: 1.1rem;
     max-width: 700px;
     margin: 0 auto;
     opacity: 0.9;
@@ -136,8 +136,9 @@ nav ul li a:hover {
 
 /* Sections */
 section {
-    padding: 100px 0;
+    padding: 50px 0;
 }
+
 
 .bg-alt {
     background-color: var(--bg-light);
