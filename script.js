@@ -1,67 +1,62 @@
-document.addEventListener('DOMContentLoaded', () => {
-    // Mobile Menu Toggle
-    const menuToggle = document.getElementById('mobile-menu');
-    const navLinksContainer = document.querySelector('.nav-links');
+document.addEventListener("DOMContentLoaded", () => {
 
-    if (menuToggle) {
-        menuToggle.addEventListener('click', () => {
-            navLinksContainer.classList.toggle('active');
-            // Toggle icon between bars and times
-            const icon = menuToggle.querySelector('i');
-            icon.classList.toggle('fa-bars');
-            icon.classList.toggle('fa-times');
+    const menu = document.getElementById("mobile-menu");
+    const nav = document.querySelector(".nav-links");
+
+    menu.addEventListener("click", () => {
+        nav.classList.toggle("active");
+    });
+
+    // Smooth Scroll
+    document.querySelectorAll("nav a").forEach(link => {
+        link.addEventListener("click", e => {
+            e.preventDefault();
+            document.querySelector(link.getAttribute("href"))
+                .scrollIntoView({ behavior: "smooth" });
         });
+    });
+
+    // Active Link
+    window.addEventListener("scroll", () => {
+        let current = "";
+
+        document.querySelectorAll("section").forEach(sec => {
+            if (scrollY >= sec.offsetTop - 100) {
+                current = sec.id;
+            }
+        });
+
+        document.querySelectorAll("nav a").forEach(a => {
+            a.classList.remove("active");
+            if (a.getAttribute("href") === "#" + current) {
+                a.classList.add("active");
+            }
+        });
+    });
+
+    // Reveal Animation
+    const reveals = document.querySelectorAll(".reveal");
+
+    window.addEventListener("scroll", () => {
+        reveals.forEach(el => {
+            if (el.getBoundingClientRect().top < window.innerHeight - 100) {
+                el.classList.add("active");
+            }
+        });
+    });
+
+});
+
+// AI Chatbot
+function reply() {
+    const input = document.getElementById("userInput").value.toLowerCase();
+    let response = "I am a Web Developer!";
+
+    if (input.includes("skills")) {
+        response = "HTML, CSS, JS, AI/ML";
+    } else if (input.includes("project")) {
+        response = "I built Green Nest and AI projects!";
     }
 
-    // Smooth scrolling for navigation links
-    const navLinks = document.querySelectorAll('header nav ul li a');
-    
-    navLinks.forEach(link => {
-        link.addEventListener('click', (e) => {
-            e.preventDefault();
-            const targetId = link.getAttribute('href');
-            const targetSection = document.querySelector(targetId);
-            
-            if (targetSection) {
-                // Close mobile menu if open
-                if (navLinksContainer.classList.contains('active')) {
-                    navLinksContainer.classList.remove('active');
-                    const icon = menuToggle.querySelector('i');
-                    icon.classList.add('fa-bars');
-                    icon.classList.remove('fa-times');
-                }
-
-                window.scrollTo({
-                    top: targetSection.offsetTop - 60, // Adjust for reduced sticky header
-                    behavior: 'smooth'
-                });
-            }
-        });
-    });
-
-    // Simple scroll reveal animation
-    const revealElements = document.querySelectorAll('.project-card, .skill-division, .flip-card, .more-item');
-    
-    const revealOnScroll = () => {
-        const triggerBottom = window.innerHeight / 5 * 4;
-        
-        revealElements.forEach(el => {
-            const elTop = el.getBoundingClientRect().top;
-            
-            if (elTop < triggerBottom) {
-                el.style.opacity = '1';
-                el.style.transform = 'translateY(0)';
-            }
-        });
-    };
-
-    // Set initial state for reveal animation
-    revealElements.forEach(el => {
-        el.style.opacity = '0';
-        el.style.transform = 'translateY(20px)';
-        el.style.transition = 'all 0.6s ease-out';
-    });
-
-    window.addEventListener('scroll', revealOnScroll);
-    revealOnScroll(); // Run once on load
-});
+    document.getElementById("botReply").innerText = response;
+}
