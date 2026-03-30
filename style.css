@@ -35,7 +35,7 @@ body {
 header {
     background-color: var(--navy-deep);
     color: var(--white);
-    padding: 15px 0;
+    padding: 8px 0;
     position: sticky;
     top: 0;
     z-index: 1000;
@@ -44,56 +44,62 @@ header {
 
 .header-container {
     display: flex;
-    flex-direction: column;
+    justify-content: space-between;
     align-items: center;
-    gap: 15px;
-    padding: 20px 0;
+    padding: 5px 0;
 }
 
 .brand {
     display: flex;
-    flex-direction: column;
     align-items: center;
-    text-align: center;
-    gap: 10px;
+    gap: 12px;
 }
 
 .profile-img-container img {
-    width: 150px;
-    height: 150px;
+    width: 45px;
+    height: 45px;
     border-radius: 50%;
-    border: 3px solid var(--blue-accent);
+    border: 2px solid var(--blue-accent);
     object-fit: cover;
     object-position: top;
     background-color: var(--white);
-    margin-bottom: 5px;
+}
+
+.name-box {
+    text-align: left;
 }
 
 .name-box h1 {
-    font-size: 1.8rem;
-    letter-spacing: 2px;
-    margin-bottom: 2px;
+    font-size: 1.2rem;
+    letter-spacing: 1px;
+    margin-bottom: 0;
 }
 
 .name-box p {
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     color: var(--blue-accent);
     text-transform: uppercase;
     font-weight: 600;
 }
 
+.menu-toggle {
+    display: none;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: var(--white);
+}
+
 nav ul {
     display: flex;
     list-style: none;
-    gap: 30px;
-    margin-top: 10px;
+    gap: 20px;
 }
 
 nav ul li a {
     color: var(--white);
     text-decoration: none;
     font-weight: 500;
-    font-size: 0.95rem;
+    font-size: 0.9rem;
     transition: var(--transition);
     opacity: 0.8;
 }
@@ -396,18 +402,81 @@ footer {
 }
 
 /* Responsive */
-@media (max-width: 768px) {
+@media (max-width: 992px) {
     .header-container {
+        padding: 10px 0;
+    }
+
+    .menu-toggle {
+        display: block;
+    }
+
+    .nav-links {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        background-color: var(--navy-deep);
+        padding: 20px 0;
+        box-shadow: var(--shadow-md);
+        border-top: 1px solid rgba(255,255,255,0.1);
+    }
+
+    .nav-links.active {
+        display: block;
+    }
+
+    nav ul {
         flex-direction: column;
+        align-items: center;
         gap: 20px;
     }
-    
+
+    .hero-content h2 {
+        font-size: 2.8rem;
+    }
+}
+
+@media (max-width: 768px) {
+    section {
+        padding: 60px 0;
+    }
+
+    .section-title {
+        font-size: 1.8rem;
+        margin-bottom: 40px;
+    }
+
     .hero-content h2 {
         font-size: 2.2rem;
     }
+
+    .skills-grid, .project-grid, .achievements-grid, .more-info-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .flip-card {
+        width: 100%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 480px) {
+    .name-box h1 {
+        font-size: 1rem;
+    }
     
-    nav ul {
-        gap: 15px;
-        font-size: 0.85rem;
+    .name-box p {
+        font-size: 0.6rem;
+    }
+
+    .brand {
+        gap: 8px;
+    }
+
+    .profile-img-container img {
+        width: 35px;
+        height: 35px;
     }
 }
