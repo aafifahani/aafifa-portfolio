@@ -1,62 +1,34 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener('DOMContentLoaded', () => {
 
-    const menu = document.getElementById("mobile-menu");
-    const nav = document.querySelector(".nav-links");
+    const menuToggle = document.getElementById('mobile-menu');
+    const navLinksContainer = document.querySelector('.nav-links');
 
-    menu.addEventListener("click", () => {
-        nav.classList.toggle("active");
-    });
+    if (menuToggle) {
+        menuToggle.addEventListener('click', () => {
+            navLinksContainer.classList.toggle('active');
 
-    // Smooth Scroll
-    document.querySelectorAll("nav a").forEach(link => {
-        link.addEventListener("click", e => {
+            const icon = menuToggle.querySelector('i');
+            icon.classList.toggle('fa-bars');
+            icon.classList.toggle('fa-times');
+        });
+    }
+
+    const navLinks = document.querySelectorAll('header nav ul li a');
+
+    navLinks.forEach(link => {
+        link.addEventListener('click', (e) => {
             e.preventDefault();
-            document.querySelector(link.getAttribute("href"))
-                .scrollIntoView({ behavior: "smooth" });
-        });
-    });
 
-    // Active Link
-    window.addEventListener("scroll", () => {
-        let current = "";
+            const targetId = link.getAttribute('href');
+            const targetSection = document.querySelector(targetId);
 
-        document.querySelectorAll("section").forEach(sec => {
-            if (scrollY >= sec.offsetTop - 100) {
-                current = sec.id;
-            }
-        });
-
-        document.querySelectorAll("nav a").forEach(a => {
-            a.classList.remove("active");
-            if (a.getAttribute("href") === "#" + current) {
-                a.classList.add("active");
-            }
-        });
-    });
-
-    // Reveal Animation
-    const reveals = document.querySelectorAll(".reveal");
-
-    window.addEventListener("scroll", () => {
-        reveals.forEach(el => {
-            if (el.getBoundingClientRect().top < window.innerHeight - 100) {
-                el.classList.add("active");
+            if (targetSection) {
+                window.scrollTo({
+                    top: targetSection.offsetTop - 60,
+                    behavior: 'smooth'
+                });
             }
         });
     });
 
 });
-
-// AI Chatbot
-function reply() {
-    const input = document.getElementById("userInput").value.toLowerCase();
-    let response = "I am a Web Developer!";
-
-    if (input.includes("skills")) {
-        response = "HTML, CSS, JS, AI/ML";
-    } else if (input.includes("project")) {
-        response = "I built Green Nest and AI projects!";
-    }
-
-    document.getElementById("botReply").innerText = response;
-}
